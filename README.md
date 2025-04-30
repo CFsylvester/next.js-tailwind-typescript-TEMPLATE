@@ -4,7 +4,7 @@
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.1-0070F3?style=flat&logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-19.0.0-0070F3?style=flat&logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-0070F3?style=flat&logo=typescript)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node->=20.0.0-61DAFB?style=flat&logo=node.js)](https://nodejs.org/) [![SASS](https://img.shields.io/badge/SASS-1.69.5-CC6699?style=flat&logo=sass)](https://sass-lang.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3.0-CC6699?style=flat&logo=tailwind-css)](https://tailwindcss.com/) [![Yarn](https://img.shields.io/badge/Yarn-1.22.22-F7740D?style=flat&logo=yarn)](https://yarnpkg.com/) [![License](https://img.shields.io/badge/License-MIT-666666?style=flat)](https://opensource.org/licenses/MIT)
 
-<details open>
+<details>
 <summary>Table of Contents</summary>
 
 - [Prerequisites](#prerequisites)
