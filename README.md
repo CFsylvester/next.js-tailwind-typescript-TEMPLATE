@@ -175,9 +175,9 @@ Core styling configuration files:
 
 ### Type Definitions
 
-![Node Types](https://img.shields.io/badge/@types/node-22.15.3-61DAFB?style=flat&logo=node.js) - TypeScript definitions for Node.js
-![React Types](https://img.shields.io/badge/@types/react-19-0070F3?style=flat&logo=react) - TypeScript definitions for React
-![React DOM Types](https://img.shields.io/badge/@types/react--dom-19-0070F3?style=flat&logo=react) - TypeScript definitions for React DOM
+- ![Node Types](https://img.shields.io/badge/@types/node-22.15.3-61DAFB?style=flat&logo=node.js) - TypeScript definitions for Node.js
+- ![React Types](https://img.shields.io/badge/@types/react-19-0070F3?style=flat&logo=react) - TypeScript definitions for React
+- ![React DOM Types](https://img.shields.io/badge/@types/react--dom-19-0070F3?style=flat&logo=react) - TypeScript definitions for React DOM
 
 ## Scripts
 
