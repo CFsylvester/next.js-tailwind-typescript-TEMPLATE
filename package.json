@@ -6,9 +6,6 @@
     "node": ">=20.0.0",
     "yarn": ">=1.22.0"
   },
-  "workspaces": [
-    "."
-  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,25 +13,41 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "check-format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "check-format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "drizzle:push": "drizzle-kit push",
+    "drizzle:gen": "drizzle-kit generate --name",
+    "db:push:constituents:local": "DB_ENV=CONSTITUENT_DATA yarn drizzle:push",
+    "db:push:constituents:prod": "DB_ENV=CONSTITUENT_DATA_PROD yarn drizzle:push",
+    "db:gen:constituents": "DB_ENV=CONSTITUENT_DATA yarn drizzle:gen"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "@types/papaparse": "^5.3.15",
+    "change-case": "^5.4.4",
+    "lucide-react": "^0.510.0",
     "next": "15.3.1",
+    "papaparse": "^5.5.2",
+    "pg": "^8.15.6",
     "react": "^19.0.0",
+    "react-csv": "^2.2.2",
     "react-dom": "^19.0.0",
     "sass": "^1.69.5"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
+    "@types/pg": "^8.15.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.14",
+    "drizzle-kit": "^0.31.1",
+    "drizzle-orm": "^0.43.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
     "eslint-config-prettier": "^10.1.2",
     "postcss": "^8.4.21",
     "prettier": "^3.0.3",
     "tailwindcss": "^3.3.0",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   },
   "packageManager": "yarn@1.22.22"

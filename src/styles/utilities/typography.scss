@@ -1,0 +1,153 @@
+@layer components {
+  .text-display-lg {
+    @apply text-lg leading-[2.5rem] font-bold;
+
+    @screen sm {
+      @apply text-[2.25rem] leading-[2.75rem];
+    }
+
+    @screen md {
+      @apply text-[2.5rem] leading-[3rem];
+    }
+  }
+
+  .text-display-md {
+    @apply text-md leading-[2rem] font-semibold;
+
+    @screen sm {
+      @apply text-[1.75rem] leading-[2.25rem];
+    }
+
+    @screen md {
+      @apply text-[2rem] leading-[2.5rem];
+    }
+  }
+
+  .text-display-sm {
+    @apply text-sm leading-[1.75rem] font-semibold;
+
+    @screen sm {
+      @apply text-[1.5rem] leading-[2rem];
+    }
+
+    @screen md {
+      @apply text-[1.75rem] leading-[2.25rem];
+    }
+  }
+
+  .text-display-title {
+    @apply text-title font-medium;
+
+    @screen sm {
+      @apply text-[1.25rem] leading-[1.75rem];
+    }
+
+    @screen md {
+      @apply text-[1.5rem] leading-[2rem];
+    }
+  }
+
+  .text-display-subtitle {
+    @apply text-subtitle font-medium;
+
+    @screen sm {
+      @apply text-[1.125rem] leading-[1.5rem];
+    }
+
+    @screen md {
+      @apply text-[1.25rem] leading-[1.75rem];
+    }
+  }
+
+  .text-display-label {
+    @apply text-label font-medium;
+
+    @screen sm {
+      @apply text-[1rem] leading-[1.5rem];
+    }
+
+    @screen md {
+      @apply text-[1.125rem] leading-[1.5rem];
+    }
+  }
+
+  .text-display-body {
+    @apply text-body font-normal;
+
+    @screen sm {
+      @apply text-[1rem] leading-[1.75rem];
+    }
+
+    @screen md {
+      @apply text-[1.0625rem] leading-[1.875rem];
+    }
+  }
+
+  .text-display-caption {
+    @apply text-caption text-neu-white-darker;
+  }
+
+  .text-display-xs {
+    @apply text-caption font-semibold tracking-wide uppercase;
+  }
+}
+
+@layer base {
+  h1 {
+    @apply text-display-lg;
+  }
+
+  h2 {
+    @apply text-display-md;
+  }
+
+  h3 {
+    @apply text-display-sm;
+  }
+
+  h4 {
+    @apply text-display-title;
+  }
+
+  h5 {
+    @apply text-display-subtitle;
+  }
+
+  h6 {
+    @apply text-display-label;
+  }
+
+  p {
+    @apply text-display-body;
+  }
+
+  span {
+    @apply text-display-caption;
+  }
+
+  label {
+    @apply text-display-label;
+  }
+
+  small {
+    @apply text-display-xs;
+  }
+
+  strong,
+  b {
+    @apply font-semibold;
+  }
+
+  em,
+  i {
+    @apply italic;
+  }
+
+  blockquote {
+    @apply text-display-body italic border-l-4 pl-4 border-neu-white-border;
+  }
+
+  a {
+    @apply text-display-body underline;
+  }
+}

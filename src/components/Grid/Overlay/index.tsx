@@ -14,7 +14,7 @@ const Overlay: React.FC<Props> = ({ active }) => (
     `}
   >
     {Array.from({ length: 12 }).map((_, i) => (
-      <div key={i} className="bg-red-500 opacity-10 min-h-screen" />
+      <div key={i} className="bg-red-500 opacity-40 min-h-screen" />
     ))}
   </div>
 );

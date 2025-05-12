@@ -1,0 +1,9 @@
+/* Text gradient utility */
+/* Usage: <p class="text-gradient bg-metal-gold">Text</p> */
+@layer utilities {
+  .text-gradient {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}

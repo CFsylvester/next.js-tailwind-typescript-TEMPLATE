@@ -1,16 +1,24 @@
 'use client';
 import '@/styles/globals.scss';
 import { ReactNode, useState } from 'react';
+import { Montserrat } from 'next/font/google';
 
 // components
 import { GridOverlay, GridToggle } from '@/components/Grid';
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-montserrat',
+});
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   const [showGrid, setShowGrid] = useState(false);
   const devMode = process.env.NODE_ENV === 'development';
 
   return (
-    <html lang="en">
+    <html lang="en" className={montserrat.variable}>
       <body>
         {/* DEV GRID TOGGLE */}
         {devMode && (
@@ -25,7 +33,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <GridOverlay active={showGrid} />
 
         {/* MAIN CONTENT */}
-        <div className="z-0 grid-layout">{children}</div>
+        <main className="z-0 grid-layout">{children}</main>
       </body>
     </html>
   );

@@ -1,0 +1,62 @@
+// Base layout
+body {
+  @apply bg-brand-light-gray min-h-screen;
+}
+
+// Apply layout to the grid
+.grid-layout {
+  @apply min-h-screen h-full w-full mx-auto px-2 gap-2 grid grid-cols-4 sm:px-4 md:px-10 md:grid-cols-12 md:gap-4;
+
+  // Overrides the grid padding to be full width
+  .full-width-override {
+    @apply w-screen -mx-2 sm:-mx-4 md:-mx-10;
+  }
+
+  // Overrides the left half of the grid to be full width
+  .remove-left-padding {
+    @apply -ml-2;
+    width: calc(100% + 0.5rem);
+
+    @screen sm {
+      @apply -ml-4;
+      width: calc(100% + 1rem);
+    }
+
+    @screen md {
+      @apply -ml-10;
+      width: calc(100% + 2.5rem);
+    }
+  }
+
+  // Overrides the right half of the grid to be full width
+  .remove-right-padding {
+    @apply -mr-2;
+    width: calc(100% + 0.5rem);
+
+    @screen sm {
+      @apply -mr-4;
+      width: calc(100% + 1rem);
+    }
+
+    @screen md {
+      @apply -mr-10;
+      width: calc(100% + 2.5rem);
+    }
+  }
+
+  // Overrides the left gap of the grid
+  .remove-left-gap {
+    @apply -ml-2;
+    width: calc(100% + 0.5rem);
+
+    @screen md {
+      width: calc(100% + 1rem);
+      @apply -ml-4;
+    }
+  }
+
+  // Overrides the right gap of the grid
+  .remove-right-gap {
+    @apply -mr-2 md:-mr-4;
+  }
+}

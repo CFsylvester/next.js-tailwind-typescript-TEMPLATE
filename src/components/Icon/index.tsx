@@ -4,9 +4,9 @@ import React from 'react';
 
 // icons
 import IconGrid from './Grid';
-
+import IconSearch from './Search';
 // types
-export type IconType = 'grid';
+export type IconType = 'grid' | 'search';
 
 export interface IconProps {
   type: IconType;
@@ -20,7 +20,8 @@ const Icon: React.FC<IconProps> = ({ type, active = false, className = '', size 
   switch (type) {
     case 'grid':
       return <IconGrid active={active} className={className} size={size} />;
-
+    case 'search':
+      return <IconSearch active={active} className={className} size={size} />;
     default:
       return <></>;
   }
