@@ -15,23 +15,23 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "check-format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "drizzle:push": "drizzle-kit push",
-    "drizzle:gen": "drizzle-kit generate --name",
-    "db:push:constituents:local": "DB_ENV=CONSTITUENT_DATA yarn drizzle:push",
-    "db:push:constituents:prod": "DB_ENV=CONSTITUENT_DATA_PROD yarn drizzle:push",
-    "db:gen:constituents": "DB_ENV=CONSTITUENT_DATA yarn drizzle:gen"
+    "drizzle:gen": "drizzle-kit generate --name"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
     "@types/papaparse": "^5.3.15",
     "change-case": "^5.4.4",
+    "csv-parse": "^5.6.0",
     "lucide-react": "^0.510.0",
     "next": "15.3.1",
     "papaparse": "^5.5.2",
     "pg": "^8.15.6",
+    "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-csv": "^2.2.2",
     "react-dom": "^19.0.0",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",

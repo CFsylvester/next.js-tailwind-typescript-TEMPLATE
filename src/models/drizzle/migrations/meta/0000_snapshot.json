@@ -1,0 +1,318 @@
+{
+  "id": "3317f239-5e2f-4b1f-b5b1-a66b8cb7a7a0",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.companies": {
+      "name": "companies",
+      "schema": "",
+      "columns": {
+        "company_id": {
+          "name": "company_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vendor_id": {
+          "name": "vendor_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "historical_names": {
+          "name": "historical_names",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "place_type": {
+          "name": "place_type",
+          "type": "place_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "in_business": {
+          "name": "in_business",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verified_on": {
+          "name": "verified_on",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "street": {
+          "name": "street",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "postal_code": {
+          "name": "postal_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country_code": {
+          "name": "country_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mailing_address": {
+          "name": "mailing_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mailing_address_city": {
+          "name": "mailing_address_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mailing_address_state": {
+          "name": "mailing_address_state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mailing_address_postal_code": {
+          "name": "mailing_address_postal_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "geo_match_level": {
+          "name": "geo_match_level",
+          "type": "geo_match_level",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location_linkage": {
+          "name": "location_linkage",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_sic_code_id": {
+          "name": "primary_sic_code_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sic_code_ids": {
+          "name": "sic_code_ids",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_naics_code_id": {
+          "name": "primary_naics_code_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "naics_code_ids": {
+          "name": "naics_code_ids",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fax_number": {
+          "name": "fax_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "website": {
+          "name": "website",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contacts_count": {
+          "name": "contacts_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_contact": {
+          "name": "primary_contact",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location_employee_count": {
+          "name": "location_employee_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_location_employee_count": {
+          "name": "estimated_location_employee_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location_sales_volume": {
+          "name": "location_sales_volume",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "square_footage": {
+          "name": "square_footage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "white_collar_percentage": {
+          "name": "white_collar_percentage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "population_density": {
+          "name": "population_density",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wealthy_area_flag": {
+          "name": "wealthy_area_flag",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "headquarters_id": {
+          "name": "headquarters_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ancestor_headquarters_ids": {
+          "name": "ancestor_headquarters_ids",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cbsa_code": {
+          "name": "cbsa_code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cbsa_level": {
+          "name": "cbsa_level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "csa_code": {
+          "name": "csa_code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "census_block": {
+          "name": "census_block",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "census_tract": {
+          "name": "census_tract",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fips_code": {
+          "name": "fips_code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "greenscore": {
+          "name": "greenscore",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_updated_at": {
+          "name": "last_updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
