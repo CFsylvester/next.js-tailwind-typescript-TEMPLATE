@@ -1,12 +1,21 @@
-# Next.js | Tailwind | Typescript - TEMPLATE
+# 🚀 Next.js | Tailwind | TypeScript – TEMPLATE
 
 [![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg?style=flat)](package.json) [![Last Commit](https://img.shields.io/github/last-commit/CFsylvester/next.js-tailwind-typescript-TEMPLATE?style=flat&color=brightgreen)](https://github.com/clairesylvester/storyblok-video-compressor/commits) [![Maintenance](https://img.shields.io/badge/Maintained-yes-brightgreen.svg?style=flat)](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/graphs/commit-activity)
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.1-0070F3?style=flat&logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-19.0.0-0070F3?style=flat&logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-0070F3?style=flat&logo=typescript)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node->=20.0.0-61DAFB?style=flat&logo=node.js)](https://nodejs.org/) [![SASS](https://img.shields.io/badge/SASS-1.69.5-CC6699?style=flat&logo=sass)](https://sass-lang.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3.0-CC6699?style=flat&logo=tailwind-css)](https://tailwindcss.com/) [![Yarn](https://img.shields.io/badge/Yarn-1.22.22-F7740D?style=flat&logo=yarn)](https://yarnpkg.com/) [![License](https://img.shields.io/badge/License-MIT-666666?style=flat)](https://opensource.org/licenses/MIT)
 
-<details>
-<summary>Table of Contents</summary>
+</br>
 
+<details>
+  <summary>Related Articles</summary>
+                             
+- [Toggle Vision 👀](https://www.linkedin.com/feed/update/urn:li:activity:7320859432408514560) — A LinkedIn post by [Claire Sylvester (template creator)](https://github.com/CFsylvester) exploring the thinking behind grid toggling UX.
+  
+</details>
+
+<details>
+  <summary>Table of Contents</summary>
+  
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [VS Code Setup](#vs-code-setup)
@@ -17,7 +26,7 @@
   - [Node.js Version](#nodejs-version)
   - [Yarn Version](#yarn-version)
 - [Styling Configuration](#styling-configuration)
-- [Package Versions & Dependencies](#package-versions)
+- [Package Versions & Dependencies](#package-versions--dependencies)
   - [Core Technologies](#core-technologies)
   - [Styling & UI](#styling--ui)
   - [Development Tools](#development-tools)
@@ -191,6 +200,8 @@ Core styling configuration files:
 
 ## Grid Overlay Toggle
 
+<img src="https://github.com/user-attachments/assets/15cde075-e765-4680-9e15-244d3055cb2b" alt="Grid Toggle Animation" width="500" />
+
 ### File Structure
 
 ```
@@ -257,6 +268,9 @@ The grid system uses the following breakpoints (defined in `tailwind.config.cjs`
 ### Grid Layout
 
 The grid layout is defined in `globals.scss`:
+
+![GridResize](https://github.com/user-attachments/assets/2f6bb709-b032-4f02-aba6-bd79c1d5af10)
+
 
 ```scss
 .grid-layout {
