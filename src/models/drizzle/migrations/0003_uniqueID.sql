@@ -1,1 +1,0 @@
-ALTER TABLE "companies" ADD CONSTRAINT "companies_vendor_id_unique" UNIQUE("vendor_id");

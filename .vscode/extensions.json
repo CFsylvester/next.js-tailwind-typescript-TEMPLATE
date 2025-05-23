@@ -1,12 +1,39 @@
 {
   "recommendations": [
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "bradlc.vscode-tailwindcss",
-    "csstools.postcss",
-    "formulahendry.auto-rename-tag",
-    "christian-kohler.path-intellisense",
-    "christian-kohler.npm-intellisense",
-    "ms-vscode.vscode-typescript-next"
+    // Code Formatting & Linting
+    "esbenp.prettier-vscode", // Code formatter
+    "dbaeumer.vscode-eslint", // JavaScript/TypeScript linter
+    "ms-vscode.vscode-typescript-tslint-plugin", // Additional TypeScript linting
+
+    // TypeScript Support
+    "ms-vscode.vscode-typescript-next", // Enhanced TypeScript support
+    "yoavbls.pretty-ts-errors", // Better TypeScript error messages
+
+    // CSS & Styling
+    "bradlc.vscode-tailwindcss", // Tailwind CSS IntelliSense
+    "csstools.postcss", // PostCSS support
+    "naumovs.color-highlight", // Color highlighting
+    "anseki.vscode-color", // Color picker
+
+    // HTML/JSX Support
+    "formulahendry.auto-rename-tag", // Auto rename paired HTML/JSX tags
+
+    // Navigation & IntelliSense
+    "christian-kohler.path-intellisense", // Path autocompletion
+    "christian-kohler.npm-intellisense", // NPM package autocompletion
+
+    // Code Quality
+    "streetsidesoftware.code-spell-checker", // Spell checking
+
+    // Development Tools
+    "mikestead.dotenv", // .env file support
+    "eamodio.gitlens", // Enhanced Git integration
+
+    // Visual Aids
+    "2gua.rainbow-brackets", // Color-coded brackets
+
+    // Data Handling
+    "mechatroner.rainbow-csv", // CSV syntax highlighting
+    "janisdd.vscode-edit-csv" // CSV editor
   ]
 }

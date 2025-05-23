@@ -4,18 +4,7 @@
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.1-0070F3?style=flat&logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-19.0.0-0070F3?style=flat&logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-0070F3?style=flat&logo=typescript)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node->=20.0.0-61DAFB?style=flat&logo=node.js)](https://nodejs.org/) [![SASS](https://img.shields.io/badge/SASS-1.69.5-CC6699?style=flat&logo=sass)](https://sass-lang.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3.0-CC6699?style=flat&logo=tailwind-css)](https://tailwindcss.com/) [![Yarn](https://img.shields.io/badge/Yarn-1.22.22-F7740D?style=flat&logo=yarn)](https://yarnpkg.com/) [![License](https://img.shields.io/badge/License-MIT-666666?style=flat)](https://opensource.org/licenses/MIT)
 
-## About
-
-A modern, production-ready template for building fast and maintainable web applications. This template combines the power of Next.js for server-side rendering and static site generation, Tailwind CSS for rapid UI development, and TypeScript for enhanced code quality and developer experience. Features include:
-
-✨ **Modern Stack**: Built with Next.js 15, React 19, and TypeScript 5  
-🎨 **Styling**: Tailwind CSS with SASS support and a responsive grid system  
-🛠️ **Developer Experience**: Comprehensive VS Code setup with ESLint and Prettier  
-📱 **Responsive Design**: Mobile-first approach with customizable breakpoints  
-🚀 **Performance**: Optimized build configuration for maximum performance  
-🔧 **Tooling**: Pre-configured development tools and scripts
-
-<details open>
+<details>
 <summary>Table of Contents</summary>
 
 - [Prerequisites](#prerequisites)
@@ -34,9 +23,6 @@ A modern, production-ready template for building fast and maintainable web appli
   - [Development Tools](#development-tools)
   - [Type Definitions](#type-definitions)
 - [Scripts](#scripts)
-- [GitHub Pages Setup](#github-pages-setup)
-  - [Configuration Steps](#configuration-steps)
-  - [Custom Domain](#custom-domain)
 - [Grid Overlay Toggle](#grid-overlay-toggle)
   - [File Structure](#file-structure)
   - [Component Structure](#component-structure)
@@ -203,87 +189,89 @@ Core styling configuration files:
 - `yarn format` - Format code with Prettier
 - `yarn check-format` - Check code formatting
 
-## GitHub Pages Setup
-
-### Configuration Steps
-
-1. In your repository settings, go to **Settings** > **Pages**
-
-2. Under **Build and deployment**:
-
-   - Source: Deploy from a branch
-   - Branch: Select either:
-     - `main` and `/root` for serving from repository root
-     - `main` and `/docs` if using a docs folder
-
-3. Create (or update) `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn build
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: out
-```
-
-4. Update `next.config.js`:
-
-```js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export', // Enable static exports
-  basePath: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '',
-  images: {
-    unoptimized: true,
-  },
-};
-
-module.exports = nextConfig;
-```
-
-### Custom Domain
-
-If using a custom domain:
-
-1. Add your domain in repository **Settings** > **Pages** > **Custom domain**
-2. Create a `CNAME` file in your repository root:
-
-```
-your-domain.com
-```
-
-3. Update DNS settings with your domain provider:
-   - Type: CNAME
-   - Name: www (or subdomain)
-   - Value: your-username.github.io
-
 ## Grid Overlay Toggle
 
 ### File Structure
 
 ```
-
+src/components/Grid/
+├ index.tsx        # Main export
+├ Overlay/index.tsx  # Grid overlay implementation
+└ Toggle/index.tsx   # Grid toggle button
 ```
+
+### Component Structure
+
+The grid system consists of two main components:
+
+- **GridToggle**: A floating button component that:
+  - Displays the current breakpoint
+  - Toggles the grid overlay visibility
+  - Persists visibility state
+- **GridOverlay**: A visual guide that:
+  - Renders semi-transparent columns
+  - Adapts to current breakpoint
+  - Shows column structure and gutters
+
+### Implementation
+
+Add the grid system to your layout:
+
+```tsx
+'use client';
+import { GridToggle, GridOverlay } from '@/components/Grid';
+import { useState } from 'react';
+
+export default function Layout({ children }) {
+  const [isGridVisible, setIsGridVisible] = useState(false);
+
+  return (
+    <>
+      <GridToggle
+        active={isGridVisible}
+        onChange={setIsGridVisible}
+        className="fixed bottom-4 right-4 z-50"
+      />
+      <GridOverlay active={isGridVisible} />
+      {children}
+    </>
+  );
+}
+```
+
+### Breakpoints Configuration
+
+The grid system uses the following breakpoints (defined in `tailwind.config.cjs`):
+
+```js
+{
+  xs: '320px',
+  sm: '360px',
+  md: '656px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px'
+}
+```
+
+### Grid Layout
+
+The grid layout is defined in `globals.scss`:
+
+```scss
+.grid-layout {
+  @apply h-full w-full mx-auto
+    px-2 xs:px-2 sm:px-4 md:px-10
+    grid grid-cols-4 gap-2
+    md:grid-cols-12 md:gap-4;
+}
+```
+
+This creates:
+
+- Mobile: 4-column grid with 8px (2) gap
+- Tablet & Desktop: 12-column grid with 16px (4) gap
+- Responsive padding:
+  - Mobile (xs): 8px
+  - Small Mobile (sm): 16px
+  - Tablet & up (md): 40px

@@ -1,1 +1,0 @@
-ALTER TYPE "public"."geo_match_level" ADD VALUE 'X';
