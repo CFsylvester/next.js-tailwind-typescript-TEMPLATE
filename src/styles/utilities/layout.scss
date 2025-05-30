@@ -1,62 +1,90 @@
-// Base layout
-body {
-  @apply bg-brand-light-gray min-h-screen;
+:root {
+  // dynamic variables
+  --layout-cols: 4;
+  --layout-padding: theme('spacing.4');
+
+  // hardcoded gap
+  --layout-gap: theme('spacing.4');
+
+  // clamp layout col width
+  --layout-col-width: clamp(
+    60px,
+    calc(
+      (100vw - (2 * var(--layout-padding)) - ((var(--layout-cols) - 1) * var(--layout-gap))) /
+        var(--layout-cols)
+    ),
+    124px
+  );
+
+  @screen md {
+    --layout-cols: 6;
+    --layout-padding: theme('spacing.6');
+  }
+
+  @screen lg {
+    --layout-cols: 8;
+    --layout-padding: theme('spacing.8');
+  }
+
+  @screen xl {
+    --layout-cols: 10;
+    --layout-padding: theme('spacing.10');
+  }
+
+  @screen 2xl {
+    --layout-cols: 12;
+    --layout-padding: theme('spacing.12');
+  }
+
+  @screen 3xl {
+    --layout-cols: 14;
+    --layout-padding: theme('spacing.14');
+  }
+
+  @screen 4xl {
+    --layout-cols: 16;
+    --layout-padding: theme('spacing.16');
+  }
 }
 
-// Apply layout to the grid
-.grid-layout {
-  @apply min-h-screen h-full w-full mx-auto px-2 gap-2 grid grid-cols-4 sm:px-4 md:px-10 md:grid-cols-12 md:gap-4;
+.layout {
+  @apply grid
+    h-full
+    justify-center
+    gap-x-[var(--layout-gap)]
+    px-[var(--layout-padding)]
+    grid-cols-[repeat(var(--layout-cols),var(--layout-col-width))];
 
-  // Overrides the grid padding to be full width
-  .full-width-override {
-    @apply w-screen -mx-2 sm:-mx-4 md:-mx-10;
-  }
+  // Module container with automatic spacing behavior
+  > .module {
+    @apply h-fit z-0;
 
-  // Overrides the left half of the grid to be full width
-  .remove-left-padding {
-    @apply -ml-2;
-    width: calc(100% + 0.5rem);
-
-    @screen sm {
-      @apply -ml-4;
-      width: calc(100% + 1rem);
+    // When there are multiple modules, add consistent vertical padding
+    &:not(:only-child) {
+      @apply py-module;
     }
 
-    @screen md {
-      @apply -ml-10;
-      width: calc(100% + 2.5rem);
+    // When it's the only module on the page, center it vertically
+    &:only-child {
+      @apply my-auto;
     }
   }
+}
 
-  // Overrides the right half of the grid to be full width
-  .remove-right-padding {
-    @apply -mr-2;
-    width: calc(100% + 0.5rem);
+.grid-overlay {
+  @apply mx-auto bg-repeat-x z-10;
 
-    @screen sm {
-      @apply -mr-4;
-      width: calc(100% + 1rem);
-    }
+  width: calc(
+    var(--layout-cols) * var(--layout-col-width) + (var(--layout-cols) - 1) * var(--layout-gap)
+  );
 
-    @screen md {
-      @apply -mr-10;
-      width: calc(100% + 2.5rem);
-    }
-  }
-
-  // Overrides the left gap of the grid
-  .remove-left-gap {
-    @apply -ml-2;
-    width: calc(100% + 0.5rem);
-
-    @screen md {
-      width: calc(100% + 1rem);
-      @apply -ml-4;
-    }
-  }
-
-  // Overrides the right gap of the grid
-  .remove-right-gap {
-    @apply -mr-2 md:-mr-4;
-  }
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.2) 0,
+    rgba(255, 0, 0, 0.2) var(--layout-col-width),
+    transparent var(--layout-col-width),
+    transparent calc(var(--layout-col-width) + var(--layout-gap))
+  );
+  background-size: calc(var(--layout-col-width) + var(--layout-gap)) 100%;
+  transition: background-image 0.3s ease-in-out;
 }

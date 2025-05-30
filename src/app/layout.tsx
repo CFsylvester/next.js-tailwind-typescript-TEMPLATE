@@ -4,7 +4,7 @@ import { ReactNode, useState } from 'react';
 import { Montserrat } from 'next/font/google';
 
 // components
-import { GridOverlay, GridToggle } from '@/components/Grid';
+import GridOverlayToggle from '@/components/GridOverlayToggle';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -22,18 +22,15 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <body>
         {/* DEV GRID TOGGLE */}
         {devMode && (
-          <GridToggle
+          <GridOverlayToggle
             active={showGrid}
             onChange={setShowGrid}
             className="fixed bottom-8 right-4 z-20"
           />
         )}
 
-        {/* DEV GRID OVERLAY */}
-        <GridOverlay active={showGrid} />
-
         {/* MAIN CONTENT */}
-        <main className="z-0 grid-layout">{children}</main>
+        <main className={`layout ${showGrid ? 'grid-overlay' : ''}`}>{children}</main>
       </body>
     </html>
   );
