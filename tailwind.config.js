@@ -18,22 +18,29 @@ module.exports = {
         caption: ['0.75rem', { lineHeight: '1.125rem' }], // 12px
       },
       screens: {
-        xs: '320px',
-        sm: '360px',
-        md: '656px',
-        lg: '1024px',
-        xl: '1280px',
-        '2xl': '1536px',
+        xs: '320px', //  4 cols
+        sm: '480px', //  4 cols
+        md: '592px', //  6 cols
+        lg: '784px', //  8 cols
+        xl: '976px', // 10 cols
+        '2xl': '1168px', // 12 cols
+        '3xl': '1360px', // 14 cols
+        '4xl': '1552px', // 16 cols
+      },
+      spacing: {
+        tight: '4px',
+        text: '8px',
+        component: '16px',
+        card: '24px',
+        section: '32px',
+        container: '48px',
+        layout: '64px',
+        module: '80px',
+        hero: '120px',
       },
       colors: {
         brand: {
-          navy: '#1F2A52',
-          gray: '#272c30',
           'light-gray': '#D3D3D3',
-          slate: '#3c454d',
-          sapphire: '#2C4DDA',
-          amethyst: '#BB3EEF',
-          blush: '#E8AEB7',
         },
         neu: {
           navy: {
@@ -59,12 +66,6 @@ module.exports = {
           '6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
         'neu-white-inset':
           'inset 4px 4px 8px rgba(0, 0, 0, 0.08), inset -4px -4px 8px rgba(255, 255, 255, 0.8)',
-      },
-      backgroundImage: {
-        // Metal Values
-        'metal-gold': 'var(--metal-gold)',
-        'metal-black': 'var(--metal-black)',
-        'metal-silver': 'var(--metal-silver)',
       },
     },
   },
