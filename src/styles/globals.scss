@@ -17,3 +17,7 @@
   --metal-gold: linear-gradient(145deg, #ad8a39, #ead196);
   --metal-silver: linear-gradient(145deg, #bfc5c2, #f5f5f5, #a9a9a9);
 }
+
+body {
+  @apply bg-brand-light-gray w-full h-[100dvh] flex flex-col;
+}
