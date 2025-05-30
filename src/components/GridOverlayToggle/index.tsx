@@ -8,7 +8,18 @@ type Props = {
   className?: string;
 };
 
-const Toggle: React.FC<Props> = ({ active, onChange, className = '' }) => (
+const breakpoints = [
+  { name: 'xs', classes: 'inline sm:hidden' },
+  { name: 'sm', classes: 'hidden sm:inline md:hidden' },
+  { name: 'md', classes: 'hidden md:inline lg:hidden' },
+  { name: 'lg', classes: 'hidden lg:inline xl:hidden' },
+  { name: 'xl', classes: 'hidden xl:inline 2xl:hidden' },
+  { name: '2xl', classes: 'hidden 2xl:inline 3xl:hidden' },
+  { name: '3xl', classes: 'hidden 3xl:inline 4xl:hidden' },
+  { name: '4xl', classes: 'hidden 4xl:inline' },
+];
+
+const GridOverlayToggle: React.FC<Props> = ({ active, onChange, className = '' }) => (
   <button
     onClick={() => onChange(!active)}
     className={`
@@ -25,12 +36,11 @@ const Toggle: React.FC<Props> = ({ active, onChange, className = '' }) => (
     <div className="flex items-end mr-2">
       <span className="text-white text-display-label font-bold leading-tight">Grid</span>
       <span className="text-display-caption text-neu-white-darker ml-1">
-        <span className="xs:inline sm:hidden">(xs)</span>
-        <span className="hidden sm:inline md:hidden">(sm)</span>
-        <span className="hidden md:inline lg:hidden">(md)</span>
-        <span className="hidden lg:inline xl:hidden">(lg)</span>
-        <span className="hidden xl:inline 2xl:hidden">(xl)</span>
-        <span className="hidden 2xl:inline">(2xl)</span>
+        {breakpoints.map(({ name, classes }) => (
+          <span key={name} className={classes}>
+            ({name})
+          </span>
+        ))}
       </span>
     </div>
 
@@ -48,4 +58,4 @@ const Toggle: React.FC<Props> = ({ active, onChange, className = '' }) => (
   </button>
 );
 
-export default Toggle;
+export default GridOverlayToggle;
