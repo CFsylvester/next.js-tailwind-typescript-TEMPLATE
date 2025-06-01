@@ -15,7 +15,7 @@
 
 <details>
   <summary>Table of Contents</summary>
-  
+
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [VS Code Setup](#vs-code-setup)
@@ -33,11 +33,13 @@
   - [Type Definitions](#type-definitions)
 - [Scripts](#scripts)
 - [Grid Overlay Toggle](#grid-overlay-toggle)
-  - [File Structure](#file-structure)
-  - [Component Structure](#component-structure)
-  - [Implementation](#implementation)
   - [Breakpoints Configuration](#breakpoints-configuration)
-  - [Grid Layout](#grid-layout)
+  - [Grid Calculations](#grid-calculations)
+  - [Grid Layout (SCSS Variables)](#grid-layout-scss-variables)
+  - [Grid Overlay SCSS](#grid-overlay-scss)
+  - [Component Structure](#component-structure)
+  - [GridOverlayToggle Component](#gridoverlaytoggle-component)
+  - [Implementation](#implementation)
 
 </details>
 
@@ -200,92 +202,215 @@ Core styling configuration files:
 
 ## Grid Overlay Toggle
 
-<img src="https://github.com/user-attachments/assets/15cde075-e765-4680-9e15-244d3055cb2b" alt="Grid Toggle Animation" width="500" />
-
-### File Structure
-
-```
-src/components/Grid/
-├ index.tsx        # Main export
-├ Overlay/index.tsx  # Grid overlay implementation
-└ Toggle/index.tsx   # Grid toggle button
-```
-
-### Component Structure
-
-The grid system consists of two main components:
-
-- **GridToggle**: A floating button component that:
-  - Displays the current breakpoint
-  - Toggles the grid overlay visibility
-  - Persists visibility state
-- **GridOverlay**: A visual guide that:
-  - Renders semi-transparent columns
-  - Adapts to current breakpoint
-  - Shows column structure and gutters
-
-### Implementation
-
-Add the grid system to your layout:
-
-```tsx
-'use client';
-import { GridToggle, GridOverlay } from '@/components/Grid';
-import { useState } from 'react';
-
-export default function Layout({ children }) {
-  const [isGridVisible, setIsGridVisible] = useState(false);
-
-  return (
-    <>
-      <GridToggle
-        active={isGridVisible}
-        onChange={setIsGridVisible}
-        className="fixed bottom-4 right-4 z-50"
-      />
-      <GridOverlay active={isGridVisible} />
-      {children}
-    </>
-  );
-}
-```
-
 ### Breakpoints Configuration
 
 The grid system uses the following breakpoints (defined in `tailwind.config.cjs`):
 
 ```js
-{
-  xs: '320px',
-  sm: '360px',
-  md: '656px',
-  lg: '1024px',
-  xl: '1280px',
-  '2xl': '1536px'
+ screens: {
+  xs: '320px', //  4 cols
+  sm: '480px', //  4 cols
+  md: '592px', //  6 cols
+  lg: '784px', //  8 cols
+  xl: '976px', // 10 cols
+  '2xl': '1168px', // 12 cols
+  '3xl': '1360px', // 14 cols
+  '4xl': '1552px', // 16 cols
 }
 ```
 
-### Grid Layout
+### Grid Calculations
 
-The grid layout is defined in `globals.scss`:
+With a hardcoded variable of `--layout-gap: theme('spacing.4')` (16px), the grid remains fully responsive and divisible by multiples of 2.
 
-![GridResize](https://github.com/user-attachments/assets/2f6bb709-b032-4f02-aba6-bd79c1d5af10)
+- **Responsive Columns & Padding:**
 
+  - **xs** (`320px`): `--layout-cols: 4;` / `--layout-padding: theme('spacing.4')` (16px)
+  - **sm** (`480px`): `--layout-cols: 4;` / `--layout-padding: theme('spacing.4')` (16px)
+  - **md** (`592px`): `--layout-cols: 6;` / `--layout-padding: theme('spacing.6')` (24px)
+  - **lg** (`784px`): `--layout-cols: 8;` / `--layout-padding: theme('spacing.8')` (32px)
+  - **xl** (`976px`): `--layout-cols: 10;` / `--layout-padding: theme('spacing.10')` (40px)
+  - **2xl** (`1168px`): `--layout-cols: 12;` / `--layout-padding: theme('spacing.12')` (48px)
+  - **3xl** (`1360px`): `--layout-cols: 14;` / `--layout-padding: theme('spacing.14')` (56px)
+  - **4xl** (`1552px`): `--layout-cols: 16;` / `--layout-padding: theme('spacing.16')` (64px)
+
+- **Clamp Layout Column Width:**
 
 ```scss
-.grid-layout {
-  @apply h-full w-full mx-auto
-    px-2 xs:px-2 sm:px-4 md:px-10
-    grid grid-cols-4 gap-2
-    md:grid-cols-12 md:gap-4;
+--layout-col-width: clamp(
+  60px,
+  calc(
+    (100vw - (2 * var(--layout-padding)) - ((var(--layout-cols) - 1) * var(--layout-gap))) /
+      var(--layout-cols)
+  ),
+  124px
+);
+```
+
+This expression dynamically adjusts the column width based on the current `--layout-padding` and `--layout-cols` values at each breakpoint.
+
+### Grid Layout (SCSS Variables)
+
+The grid system relies on dynamic scss variables updated at the above breakpoints to coincide with a responsive layout that is always divisible by multiples of 2. These dynamic, responsive, variables are used in both the `.layout` and `[data-grid-overlay]` scss selectors.
+
+```scss
+:root {
+  // dynamic variables
+  --layout-cols: 4;
+  --layout-padding: theme('spacing.4');
+
+  // hardcoded gap
+  --layout-gap: theme('spacing.4');
+
+  // clamp layout col width
+  --layout-col-width: clamp(
+    60px,
+    calc(
+      (100vw - (2 * var(--layout-padding)) - ((var(--layout-cols) - 1) * var(--layout-gap))) /
+        var(--layout-cols)
+    ),
+    124px
+  );
+
+  @screen md {
+    --layout-cols: 6;
+    --layout-padding: theme('spacing.6');
+  }
+
+  @screen lg {
+    --layout-cols: 8;
+    --layout-padding: theme('spacing.8');
+  }
+
+  @screen xl {
+    --layout-cols: 10;
+    --layout-padding: theme('spacing.10');
+  }
+
+  @screen 2xl {
+    --layout-cols: 12;
+    --layout-padding: theme('spacing.12');
+  }
+
+  @screen 3xl {
+    --layout-cols: 14;
+    --layout-padding: theme('spacing.14');
+  }
+
+  @screen 4xl {
+    --layout-cols: 16;
+    --layout-padding: theme('spacing.16');
+  }
 }
 ```
 
-This creates:
+### Grid Overlay SCSS
 
-- Mobile: 4-column grid with 8px (2) gap
-- Tablet & Desktop: 12-column grid with 16px (4) gap
-- Responsive padding:
-  - Mobile (xs): 8px
-  - Small Mobile (sm): 16px
-  - Tablet & up (md): 40px
+A purely css driven grid overlay that coincides with the layout class and it's breakpoints. When the data-overlay-grid is set to active, the grid overlay fades into visibility.
+
+- **Layout**
+
+```scss
+.layout {
+  @apply grid
+    h-full
+    justify-center
+    gap-x-[var(--layout-gap)]
+    px-[var(--layout-padding)]
+    grid-cols-[repeat(var(--layout-cols),var(--layout-col-width))];
+
+  > .module {
+    @apply h-fit z-0;
+
+    &:not(:only-child) {
+      @apply py-module;
+    }
+
+    &:only-child {
+      @apply my-auto;
+    }
+  }
+}
+```
+
+- **[Data-Grid-Overlay]**
+
+```scss
+[data-grid-overlay] {
+  @apply mx-auto bg-repeat-x z-10;
+
+  width: calc(
+    var(--layout-cols) * var(--layout-col-width) + (var(--layout-cols) - 1) * var(--layout-gap)
+  );
+
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.2) 0,
+    rgba(255, 0, 0, 0.2) var(--layout-col-width),
+    transparent var(--layout-col-width),
+    transparent calc(var(--layout-col-width) + var(--layout-gap))
+  );
+  background-size: calc(var(--layout-col-width) + var(--layout-gap)) 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+
+  &[data-grid-overlay='active'] {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+```
+
+### Component Structure
+
+- **GridOverlayToggle**: A client-side button that:
+
+  - Reads and toggles a `data-grid-overlay` attribute on the `<main>` element
+  - Displays the active breakpoint label
+  - Shows a grid icon with an active/inactive state
+
+- **GridOverlay**: A purely CSS-driven overlay that:
+  - Uses CSS variables (`--layout-cols`, `--layout-col-width`, `--layout-gap`, etc.) to match the current layout
+  - Renders semi‑transparent columns across the viewport
+  - Transitions in/out when `data-grid-overlay="active"`
+
+### GridOverlayToggle Component
+
+A client side button that triggers the css overlay grid. Updates the main element data-grid-overlay with the active state.
+
+```tsx
+const [active, setActive] = useState(false);
+const mainRef = useRef<HTMLElement | null>(null);
+
+// Grab <main> once on mount
+useEffect(() => {
+  mainRef.current = document.querySelector('main');
+}, []);
+
+// Update data-grid-overlay on <main> when `active` changes
+useEffect(() => {
+  if (mainRef.current) {
+    mainRef.current.setAttribute('data-grid-overlay', active ? 'active' : '');
+  }
+}, [active]);
+```
+
+### Implementation
+
+Add the grid system to your server render layout:
+
+```tsx
+<body>
+  {/* DEV GRID TOGGLE */}
+  {devMode && <GridOverlayToggle />}
+
+  {/* MAIN CONTENT */}
+  {/* GRID OVERLAY relies on the layout class on <main> */}
+  <main data-grid-overlay className="layout">
+    {children}
+  </main>
+</body>
+```
