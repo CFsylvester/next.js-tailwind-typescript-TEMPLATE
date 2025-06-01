@@ -71,7 +71,7 @@
   }
 }
 
-.grid-overlay {
+[data-grid-overlay] {
   @apply mx-auto bg-repeat-x z-10;
 
   width: calc(
@@ -86,5 +86,14 @@
     transparent calc(var(--layout-col-width) + var(--layout-gap))
   );
   background-size: calc(var(--layout-col-width) + var(--layout-gap)) 100%;
-  transition: background-image 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+
+  &[data-grid-overlay='active'] {
+    opacity: 1;
+    visibility: visible;
+  }
 }
