@@ -16,17 +16,17 @@ const breakpoints = [
 
 const GridOverlayToggle: React.FC = () => {
   const [active, setActive] = useState(false);
-  const mainRef = useRef<HTMLElement | null>(null);
+  const overlayRef = useRef<HTMLElement | null>(null);
 
-  // Get main element reference once on mount
+  // Grab the element with [data-grid-overlay] once on mount
   useEffect(() => {
-    mainRef.current = document.querySelector('main');
+    overlayRef.current = document.querySelector('[data-grid-overlay]');
   }, []);
 
-  // Toggle grid overlay
+  // Update the attribute whenever `active` changes
   useEffect(() => {
-    if (mainRef.current) {
-      mainRef.current.setAttribute('data-grid-overlay', active ? 'active' : '');
+    if (overlayRef.current) {
+      overlayRef.current.setAttribute('data-grid-overlay', active ? 'active' : '');
     }
   }, [active]);
 

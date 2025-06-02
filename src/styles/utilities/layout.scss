@@ -69,31 +69,31 @@
       @apply my-auto;
     }
   }
-}
 
-[data-grid-overlay] {
-  @apply mx-auto bg-repeat-x z-10;
+  &[data-grid-overlay] {
+    @apply mx-auto bg-repeat-x z-10;
 
-  width: calc(
-    var(--layout-cols) * var(--layout-col-width) + (var(--layout-cols) - 1) * var(--layout-gap)
-  );
+    width: calc(
+      var(--layout-cols) * var(--layout-col-width) + (var(--layout-cols) - 1) * var(--layout-gap)
+    );
 
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(255, 0, 0, 0.2) 0,
-    rgba(255, 0, 0, 0.2) var(--layout-col-width),
-    transparent var(--layout-col-width),
-    transparent calc(var(--layout-col-width) + var(--layout-gap))
-  );
-  background-size: calc(var(--layout-col-width) + var(--layout-gap)) 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0.2) 0,
+      rgba(255, 0, 0, 0.2) var(--layout-col-width),
+      transparent var(--layout-col-width),
+      transparent calc(var(--layout-col-width) + var(--layout-gap))
+    );
+    background-size: calc(var(--layout-col-width) + var(--layout-gap)) 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease-in-out,
+      visibility 0.3s ease-in-out;
 
-  &[data-grid-overlay='active'] {
-    opacity: 1;
-    visibility: visible;
+    &[data-grid-overlay='active'] {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
