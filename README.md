@@ -207,10 +207,10 @@ Core styling configuration files:
 - `yarn lint:fix` - Fix ESLint errors
 - `yarn format` - Format code with Prettier
 - `yarn check-format` - Check code formatting
+- `yarn typecheck` - Check Typescript types
 
 ## CI & Deployments
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE)
 [![CI Checks](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/actions/workflows/ci.yml/badge.svg)](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/actions/workflows/ci.yml)
 
 This template includes a built-in GitHub Actions workflow (`ci.yml`) that runs automatically on all pull requests and pushes to `main` and `staging`.
@@ -220,10 +220,6 @@ This template includes a built-in GitHub Actions workflow (`ci.yml`) that runs a
 - 🔍 Linting with ESLint
 - ✅ Type-checking with TypeScript
 - 🔨 Build verification (`next build`)
-- 🛑 Main branch is protected — requires `[override-main]` in commit message to push directly
-
-> All CI checks must pass before merging into `main` or `staging`.  
-> Preview deployments are automatically handled by Vercel for all branches and PRs.
 
 ---
 
