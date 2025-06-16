@@ -1,38 +1,14 @@
 name: 🚨 CI Checks
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
       - staging
 
 jobs:
-  check-main-override:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🛑 Block direct pushes to main (unless override flag)
-        run: |
-          echo "🔍 Event: ${{ github.event_name }} | Ref: ${{ github.ref }}"
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            COMMIT_MSG="${{ github.event.head_commit.message }}"
-            echo "🔍 Commit message: $COMMIT_MSG"
-            if [[ "$COMMIT_MSG" != *"[override-main]"* ]]; then
-              echo "❌ Direct push to main is blocked. Use a PR or include [override-main] in your commit message."
-              exit 1
-            else
-              echo "✅ Override flag found. Proceeding."
-            fi
-          else
-            echo "ℹ️ Not a push to main — skipping override check."
-          fi
-
   lint:
     name: 🔍 Lint
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +21,6 @@ jobs:
 
   typecheck:
     name: ✅ Type Check
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +33,6 @@ jobs:
 
   build:
     name: 🔨 Build
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
