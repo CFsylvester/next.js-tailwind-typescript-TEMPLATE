@@ -33,6 +33,9 @@
   - [Development Tools](#development-tools)
   - [Type Definitions](#type-definitions)
 - [Scripts](#scripts)
+- [CI & Deployments](#ci--deployments)
+  - [CI Workflows Includes](#ci-workflow-includes)
+  - [Vercel Deploy Flow](#-vercel-deploy-flow)
 - [Grid Overlay Toggle](#grid-overlay-toggle)
   - [Breakpoints Configuration](#breakpoints-configuration)
   - [Layout Root (Dynamic SCSS Variables)](#layout-root-dynamic-scss-variables)
@@ -204,6 +207,33 @@ Core styling configuration files:
 - `yarn lint:fix` - Fix ESLint errors
 - `yarn format` - Format code with Prettier
 - `yarn check-format` - Check code formatting
+
+## CI & Deployments
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE)
+[![CI Checks](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/actions/workflows/ci.yml/badge.svg)](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/actions/workflows/ci.yml)
+
+This template includes a built-in GitHub Actions workflow (`ci.yml`) that runs automatically on all pull requests and pushes to `main` and `staging`.
+
+### CI Workflow Includes
+
+- 🔍 Linting with ESLint
+- ✅ Type-checking with TypeScript
+- 🔨 Build verification (`next build`)
+- 🛑 Main branch is protected — requires `[override-main]` in commit message to push directly
+
+> All CI checks must pass before merging into `main` or `staging`.  
+> Preview deployments are automatically handled by Vercel for all branches and PRs.
+
+---
+
+### 🌐 Vercel Deploy Flow
+
+| Branch     | Environment | Deployment                        |
+| ---------- | ----------- | --------------------------------- |
+| `main`     | Production  | ✅ Auto-deploy to prod            |
+| `staging`  | Staging     | ✅ Auto-deploy to preview/staging |
+| feature PR | Preview     | ✅ Deploy Preview via Vercel      |
 
 ## Grid Overlay Toggle
 
