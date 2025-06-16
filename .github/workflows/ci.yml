@@ -11,21 +11,21 @@ on:
 
 jobs:
   check-main-override:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    outputs:
-      bypassed: ${{ steps.override.outputs.bypassed }}
-    steps:
-      - name: 🛑 Prevent direct push to main without override
-        id: override
-        run: |
-          if [[ "${{ github.event.head_commit.message }}" == *"[override-main]"* ]]; then
-            echo "✅ Override flag found. Proceeding."
-            echo "bypassed=true" >> $GITHUB_OUTPUT
-          else
+  runs-on: ubuntu-latest
+  steps:
+    - name: 🛑 Block direct pushes to main (unless override flag)
+      run: |
+        echo "🔍 Checking push context: ${{ github.event_name }} → ${{ github.ref }}"
+        if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+          if [[ "${{ github.event.head_commit.message }}" != *"[override-main]"* ]]; then
             echo "❌ Direct push to main is blocked. Use a PR or include [override-main] in your commit message."
             exit 1
+          else
+            echo "✅ Override flag found. Allowing push to main."
           fi
+        else
+          echo "ℹ️ Not a direct push to main. Skipping protection."
+        fi
 
   lint:
     name: 🔍 Lint
