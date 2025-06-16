@@ -51,6 +51,9 @@
 [![Yarn](https://img.shields.io/badge/Yarn->=1.22.0-F7740D?style=flat&logo=yarn)](https://yarnpkg.com/)
 [![VS Code](https://img.shields.io/badge/Editor-VS%20Code-666666?style=flat&logo=visual-studio-code)](https://code.visualstudio.com/)
 
+> ⚠️ Direct pushes to `main` are blocked by CI unless the commit message includes `[override-main]`.
+> Use Pull Requests into `main`, or merge from `staging`.
+
 ## Getting Started
 
 1. Clone the repository:
@@ -411,26 +414,25 @@ useEffect(() => {
 Add the grid system to your server render layout found in `layout.tsx` within the app directory:
 
 ```tsx
-  // check env vars
-  const devMode = process.env.NODE_ENV === 'development';
-  const isGridOverlayOverride = process.env.GRID_OVERLAY_OVERRIDE === 'true';
+// check env vars
+const devMode = process.env.NODE_ENV === 'development';
+const isGridOverlayOverride = process.env.GRID_OVERLAY_OVERRIDE === 'true';
 
-  // show grid overlay if dev mode is true or if the grid overlay override is true
-  const showGridOverlay = devMode || isGridOverlayOverride;
+// show grid overlay if dev mode is true or if the grid overlay override is true
+const showGridOverlay = devMode || isGridOverlayOverride;
 
-  return (
-    <html lang="en" className={montserrat.variable}>
-      <body>
-        {/* DEV GRID TOGGLE */}
-        {showGridOverlay && <GridOverlayToggle />}
+return (
+  <html lang="en" className={montserrat.variable}>
+    <body>
+      {/* DEV GRID TOGGLE */}
+      {showGridOverlay && <GridOverlayToggle />}
 
-        {/* MAIN CONTENT */}
-        {/* GRID OVERLAY relies on the layout class */}
-        <main data-grid-overlay className={'layout'}>
-          {children}
-        </main>
-      </body>
-    </html>
-  );
-
+      {/* MAIN CONTENT */}
+      {/* GRID OVERLAY relies on the layout class */}
+      <main data-grid-overlay className={'layout'}>
+        {children}
+      </main>
+    </body>
+  </html>
+);
 ```
