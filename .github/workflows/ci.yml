@@ -1,0 +1,83 @@
+name: 🚨 CI Checks
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  check-main-override:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Prevent direct push to main without override
+        run: |
+          echo "Checking for override..."
+          if [[ "${{ github.event.head_commit.message }}" != *"[override-main]"* ]]; then
+            echo "❌ Direct push to main is blocked. Use a PR or include [override-main] in your commit message."
+            exit 1
+          fi
+          echo "✅ Override flag found. Proceeding."
+
+  lint:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+    needs: [check-main-override]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run Linter
+        run: yarn lint
+
+  typecheck:
+    name: ✅ Type Check
+    runs-on: ubuntu-latest
+    needs: [check-main-override]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run TypeScript
+        run: yarn typecheck
+
+  build:
+    name: 🔨 Build
+    runs-on: ubuntu-latest
+    needs: [check-main-override]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: ⚡ Cache .next build
+        uses: actions/cache@v4
+        with:
+          path: .next
+          key: next-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            next-${{ runner.os }}-
+
+      - name: Build App
+        run: yarn build
