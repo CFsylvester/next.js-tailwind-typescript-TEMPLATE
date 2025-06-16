@@ -1,10 +1,6 @@
 name: 🚨 CI Checks
 
 on:
-  push:
-    branches:
-      - main
-      - staging
   pull_request:
     branches:
       - '**'
