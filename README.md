@@ -210,7 +210,6 @@ Core styling configuration files:
 
 ## CI & Deployments
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE)
 [![CI Checks](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/actions/workflows/ci.yml/badge.svg)](https://github.com/CFsylvester/next.js-tailwind-typescript-TEMPLATE/actions/workflows/ci.yml)
 
 This template includes a built-in GitHub Actions workflow (`ci.yml`) that runs automatically on all pull requests and pushes to `main` and `staging`.
