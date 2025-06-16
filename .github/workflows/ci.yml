@@ -13,19 +13,24 @@ jobs:
   check-main-override:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    outputs:
+      bypassed: ${{ steps.override.outputs.bypassed }}
     steps:
       - name: 🛑 Prevent direct push to main without override
+        id: override
         run: |
-          echo "Checking for override..."
-          if [[ "${{ github.event.head_commit.message }}" != *"[override-main]"* ]]; then
+          if [[ "${{ github.event.head_commit.message }}" == *"[override-main]"* ]]; then
+            echo "✅ Override flag found. Proceeding."
+            echo "bypassed=true" >> $GITHUB_OUTPUT
+          else
             echo "❌ Direct push to main is blocked. Use a PR or include [override-main] in your commit message."
             exit 1
           fi
-          echo "✅ Override flag found. Proceeding."
 
   lint:
     name: 🔍 Lint
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main' || github.event_name != 'push' || needs.check-main-override.result == 'success'
     needs: [check-main-override]
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +48,7 @@ jobs:
   typecheck:
     name: ✅ Type Check
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main' || github.event_name != 'push' || needs.check-main-override.result == 'success'
     needs: [check-main-override]
     steps:
       - uses: actions/checkout@v4
@@ -60,6 +66,7 @@ jobs:
   build:
     name: 🔨 Build
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main' || github.event_name != 'push' || needs.check-main-override.result == 'success'
     needs: [check-main-override]
     steps:
       - uses: actions/checkout@v4
