@@ -10,6 +10,7 @@
   <summary>Related Articles</summary>
                              
 - [Toggle Vision 👀](https://www.linkedin.com/feed/update/urn:li:activity:7320859432408514560) — A LinkedIn post by [Claire Sylvester (template creator)](https://github.com/CFsylvester) exploring the thinking behind grid toggling UX.
+- [Re‑Toggled Vision: A Lean, SCSS‑First Grid Overlay](https://www.linkedin.com/pulse/retoggled-vision-lean-cssfirst-grid-overlay-claire-sylvester-jh5yc/) - A LinkedIn post by [Claire Sylvester (template creator)](https://github.com/CFsylvester) reworking the original "Toggle Vision" CSS grid overlay toggle.
   
 </details>
 
@@ -410,14 +411,26 @@ useEffect(() => {
 Add the grid system to your server render layout found in `layout.tsx` within the app directory:
 
 ```tsx
-<body>
-  {/* DEV GRID TOGGLE */}
-  {devMode && <GridOverlayToggle />}
+  // check env vars
+  const devMode = process.env.NODE_ENV === 'development';
+  const isGridOverlayOverride = process.env.GRID_OVERLAY_OVERRIDE === 'true';
 
-  {/* MAIN CONTENT */}
-  {/* GRID OVERLAY relies on the layout class on <main> */}
-  <main data-grid-overlay className="layout">
-    {children}
-  </main>
-</body>
+  // show grid overlay if dev mode is true or if the grid overlay override is true
+  const showGridOverlay = devMode || isGridOverlayOverride;
+
+  return (
+    <html lang="en" className={montserrat.variable}>
+      <body>
+        {/* DEV GRID TOGGLE */}
+        {showGridOverlay && <GridOverlayToggle />}
+
+        {/* MAIN CONTENT */}
+        {/* GRID OVERLAY relies on the layout class */}
+        <main data-grid-overlay className={'layout'}>
+          {children}
+        </main>
+      </body>
+    </html>
+  );
+
 ```
